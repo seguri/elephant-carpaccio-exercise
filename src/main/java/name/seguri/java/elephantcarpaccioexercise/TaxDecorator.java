@@ -4,17 +4,17 @@ public class TaxDecorator implements ItemDecorator {
 
   @Override
   public Item decorate(final Item item) {
-    return item.withFinalPrice(item.finalPrice() * (1 + taxRate(item.state())));
+    return item.withFinalPrice(item.finalPrice().multiply(taxRate(item.state())));
   }
 
   private double taxRate(final String state) {
     return switch (state) {
-      case "UT" -> 0.0685;
-      case "NV" -> 0.08;
-      case "TX" -> 0.0625;
-      case "AL" -> 0.04;
-      case "CA" -> 0.0825;
-      default -> 0.0;
+      case "UT" -> 1.0685;
+      case "NV" -> 1.08;
+      case "TX" -> 1.0625;
+      case "AL" -> 1.04;
+      case "CA" -> 1.0825;
+      default -> 1.0;
     };
   }
 }

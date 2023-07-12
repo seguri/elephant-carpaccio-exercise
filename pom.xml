@@ -8,13 +8,17 @@
     <version>3.1.0</version>
     <relativePath/>
   </parent>
+
   <groupId>name.seguri.java</groupId>
   <artifactId>elephant-carpaccio-exercise</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0-SNAPSHOT</version>
+
   <name>elephant-carpaccio-exercise</name>
   <description>Elephant Carpaccio Exercise</description>
+
   <properties>
     <java.version>17</java.version>
+    <dep.plugin.error-prone.version>2.20.0</dep.plugin.error-prone.version>
     <dep.plugin.spotless.version>2.36.0</dep.plugin.spotless.version>
     <dep.plugin.googleJavaFormat.version>1.16.0</dep.plugin.googleJavaFormat.version>
   </properties>
@@ -96,7 +100,23 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <compilerArgs>
+            <arg>-XDcompilePolicy=simple</arg>
+            <arg>-Xplugin:ErrorProne</arg>
+          </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>com.google.errorprone</groupId>
+              <artifactId>error_prone_core</artifactId>
+              <version>${dep.plugin.error-prone.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
-
 </project>
